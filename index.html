@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --teal-darkest: #004242;
-            --teal-dark: #006666;
-            --teal-primary: #008080;
-            --teal-light: #40E0D0;
+            --teal-darkest: #0A2A3B;
+            --teal-dark: #0D3D56;
+            --teal-primary: #115E7C;
+            --teal-light: #1A8BB2;
             --gradient: linear-gradient(135deg, var(--teal-darkest), var(--teal-dark));
         }
 
@@ -18,7 +18,115 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+        }
+
+        body {
             font-family: 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Fluid Typography */
+        @media screen and (min-width: 320px) {
+            html {
+                font-size: calc(16px + 2 * ((100vw - 320px) / 680));
+            }
+        }
+
+        @media screen and (min-width: 1000px) {
+            html {
+                font-size: 18px;
+            }
+        }
+
+        /* Consistent Spacing */
+        .section {
+            padding: clamp(3rem, 8vw, 8rem) clamp(1rem, 5vw, 3rem);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 3vw, 2rem);
+        }
+
+        /* Enhanced Responsive Design */
+        @media (max-width: 768px) {
+            .desc-content, 
+            .reverse .desc-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .download-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            nav {
+                padding: 1rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+                margin: 0 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 8vw, 3.5rem);
+            }
+
+            .hero p {
+                font-size: clamp(1rem, 4vw, 1.5rem);
+            }
+        }
+
+        /* Improved Visual Hierarchy */
+        .desc-text h2 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+        }
+
+        .desc-text p {
+            font-size: clamp(1rem, 2vw, 1.1rem);
+        }
+
+        /* Enhanced Button Style */
+        .btn {
+            padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1.5rem, 4vw, 3rem);
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            background: var(--teal-light);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--teal-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Image Responsiveness */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Section Transitions */
+        section {
+            position: relative;
+            transition: all 0.3s ease;
         }
 
         body {
@@ -134,24 +242,6 @@
             position: relative;
         }
 
-        .btn {
-            background: white;
-            color: var(--teal-darkest);
-            padding: 1.2rem 3rem;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-        }
-
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -250,6 +340,23 @@
             font-size: 0.9rem;
             opacity: 0.8;
         }
+
+        .download-info {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .download-info i {
+            margin-right: 0.5rem;
+        }
+
+        .btn i {
+            margin-right: 0.8rem;
+        }
     </style>
 </head>
 <body>
@@ -333,8 +440,17 @@
     <section class="download" id="download">
         <h2>Join the Community Revolution</h2>
         <p style="margin: 1rem 0;">Be part of something bigger. Connect, collaborate, and create change together.</p>
-        <button class="btn">Download Synthonize Beta</button>
-        <p class="coming-soon">Coming soon to Android devices</p>
+        <a href="C:\Users\jeremee\Documents\synthronize-implementation site/Synthronize.apk" 
+           download="Synthronize.apk" 
+           class="btn">
+            <i class="fas fa-download"></i>
+            Download Synthonize Beta
+        </a>
+        <p class="coming-soon">Android v7.0+ required</p>
+        <div class="download-info">
+            <span><i class="fas fa-file"></i> Version 0.9.0 Beta</span>
+            <span><i class="fas fa-weight"></i> 15MB</span>
+        </div>
     </section>
 </body>
 </html>
