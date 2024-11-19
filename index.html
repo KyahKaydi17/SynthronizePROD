@@ -3,454 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium App - Coming Soon</title>
+    <title>Synthronize - Connect Your Communities</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root {
-            --teal-darkest: #0A2A3B;
-            --teal-dark: #0D3D56;
-            --teal-primary: #115E7C;
-            --teal-light: #1A8BB2;
-            --gradient: linear-gradient(135deg, var(--teal-darkest), var(--teal-dark));
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            font-size: 16px;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Fluid Typography */
-        @media screen and (min-width: 320px) {
-            html {
-                font-size: calc(16px + 2 * ((100vw - 320px) / 680));
-            }
-        }
-
-        @media screen and (min-width: 1000px) {
-            html {
-                font-size: 18px;
-            }
-        }
-
-        /* Consistent Spacing */
-        .section {
-            padding: clamp(3rem, 8vw, 8rem) clamp(1rem, 5vw, 3rem);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 clamp(1rem, 3vw, 2rem);
-        }
-
-        /* Enhanced Responsive Design */
-        @media (max-width: 768px) {
-            .desc-content, 
-            .reverse .desc-content {
-                flex-direction: column;
-                gap: 2rem;
-            }
-
-            .feature-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .download-info {
-                flex-direction: column;
-                align-items: center;
-                gap: 1rem;
-            }
-
-            nav {
-                padding: 1rem;
-            }
-
-            nav a {
-                font-size: 0.9rem;
-                margin: 0 0.5rem;
-            }
-
-            .hero h1 {
-                font-size: clamp(2rem, 8vw, 3.5rem);
-            }
-
-            .hero p {
-                font-size: clamp(1rem, 4vw, 1.5rem);
-            }
-        }
-
-        /* Improved Visual Hierarchy */
-        .desc-text h2 {
-            font-size: clamp(1.5rem, 4vw, 2rem);
-        }
-
-        .desc-text p {
-            font-size: clamp(1rem, 2vw, 1.1rem);
-        }
-
-        /* Enhanced Button Style */
-        .btn {
-            padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1.5rem, 4vw, 3rem);
-            font-size: clamp(1rem, 2vw, 1.2rem);
-            background: var(--teal-light);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            background: var(--teal-primary);
-            transform: translateY(-2px);
-        }
-
-        /* Image Responsiveness */
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-
-        /* Section Transitions */
-        section {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        body {
-            background-color: #f5f5f5;
-        }
-
-        nav {
-            background: var(--teal-darkest);
-            padding: 1.2rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1.5rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--teal-light);
-        }
-
-        .hero {
-            background: var(--gradient);
-            color: white;
-            padding: 8rem 2rem 4rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -50px;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: #f5f5f5;
-            transform: skewY(-3deg);
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .app-preview {
-            max-width: 300px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            margin: 3rem 0;
-            transition: transform 0.3s;
-        }
-
-        .app-preview:hover {
-            transform: translateY(-10px);
-        }
-
-        .features {
-            padding: 5rem 2rem;
-            background: white;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
-            max-width: 1200px;
-            margin: 3rem auto;
-        }
-
-        .feature-card {
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            background: white;
-            text-align: left;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .feature-card i {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--teal-dark), var(--teal-light));
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        .download {
-            background: var(--gradient);
-            padding: 5rem 2rem;
-            text-align: center;
-            color: white;
-            position: relative;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .feature-grid {
-                grid-template-columns: 1fr;
-            }
-
-            nav {
-                padding: 1rem;
-            }
-
-            nav a {
-                margin: 0 0.8rem;
-                font-size: 0.9rem;
-            }
-        }
-
-        .descriptions {
-            padding: 4rem 2rem;
-            background: #f8f8f8;
-        }
-
-        .desc-panel {
-            max-width: 1200px;
-            margin: 4rem auto;
-        }
-
-        .desc-content {
-            display: flex;
-            align-items: center;
-            gap: 4rem;
-        }
-
-        .reverse .desc-content {
-            flex-direction: row-reverse;
-        }
-
-        .desc-img {
-            width: 100%;
-            max-width: 400px;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .desc-img:hover {
-            transform: translateY(-5px);
-        }
-
-        .desc-text {
-            flex: 1;
-        }
-
-        .desc-text h2 {
-            color: var(--teal-darkest);
-            margin-bottom: 1rem;
-            font-size: 2rem;
-        }
-
-        .desc-text p {
-            color: #666;
-            line-height: 1.6;
-            font-size: 1.1rem;
-        }
-
-        @media (max-width: 768px) {
-            .desc-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 2rem;
-            }
-            
-            .reverse .desc-content {
-                flex-direction: column;
-            }
-            
-            .desc-img {
-                max-width: 100%;
-            }
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            margin-top: 1rem;
-        }
-
-        .coming-soon {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        .download-info {
-            margin-top: 1.5rem;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.8);
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-        }
-
-        .download-info i {
-            margin-right: 0.5rem;
-        }
-
-        .btn i {
-            margin-right: 0.8rem;
+            --brand-primary: #008080; /* Teal */
+            --brand-secondary: #006666; /* Darker Teal */
+            --brand-accent: #00a3a3; /* Lighter Teal */
+            --brand-light: #e6ffff; /* Very Light Teal */
         }
     </style>
+
+    <script>
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY");
+        })();
+
+        function sendEmail(e) {
+            e.preventDefault();
+            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', e.target, 'YOUR_PUBLIC_KEY')
+                .then((result) => {
+                    alert('Message sent successfully!');
+                }, (error) => {
+                    alert('Failed to send message.');
+                });
+        }
+    </script>
 </head>
-<body>
-    <nav>
-        <a href="#home">Home</a>
-        <a href="#features">Features</a>
-        <a href="#community">Community</a>
-        <a href="#download">Download</a>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <img src="synthronizeLogo.png" alt="Synthronize Logo" class="h-10">
+                <div class="space-x-8">
+                    <a href="#features" class="text-gray-700 hover:text-[#008080]">Features</a>
+                    <a href="#about" class="text-gray-700 hover:text-indigo-600">About</a>
+                    <a href="#contact" class="text-gray-700 hover:text-indigo-600">Contact</a>
+                </div>
+            </div>
+        </div>
     </nav>
 
-    <section class="hero" id="home">
-        <h1>Synthonize</h1>
-        <p>Unite, Collaborate, Transform Communities</p>
-        <p class="subtitle">The next generation social platform for meaningful connections</p>
-        <img src="https://via.placeholder.com/300" alt="Synthonize App Preview" class="app-preview">
-    </section>
-
-    <section class="features" id="features">
-        <h2 style="text-align: center; color: var(--teal-darkest);">Connect & Grow Together</h2>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <i class="fas fa-users"></i>
-                <h3>Community Hubs</h3>
-                <p>Create and join vibrant community spaces for shared interests and causes</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-handshake"></i>
-                <h3>Collaborative Projects</h3>
-                <p>Launch community initiatives and work together for positive change</p>
-            </div>
-            <div class="feature-card">
-                <i class="fas fa-comments"></i>
-                <h3>Real Connections</h3>
-                <p>Foster meaningful discussions and build lasting relationships</p>
+    <!-- Hero Section -->
+    <section class="pt-20 pb-32 bg-gradient-to-r from-[#008080] to-[#006666]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2 text-white">
+                    <h1 class="text-5xl font-bold mb-6">Connect & Grow Your Communities</h1>
+                    <p class="text-xl mb-8">Unite, collaborate, and build stronger communities together with Synthronize</p>
+                    <a href="synthronize.apk" download class="bg-white text-[#008080] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition">
+                        Download APK
+                    </a>
+                </div>
+                <div class="md:w-1/2 mt-10 md:mt-0">
+                    <img src="synthronizeLogo.png" alt="App Preview" class="w-full max-w-md mx-auto">
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="descriptions">
-        <div class="desc-panel">
-            <div class="desc-content">
-                <img src="https://via.placeholder.com/400x300" alt="Community Events" class="desc-img">
-                <div class="desc-text">
-                    <h2>Local Impact, Global Reach</h2>
-                    <p>Organize local events, coordinate community actions, and connect with like-minded individuals worldwide. Synthonize makes it easy to turn ideas into reality.</p>
+    <!-- Features -->
+    <section id="features" class="py-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-16">Why Choose Synthronize?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <div class="text-center">
+                    <i class="fas fa-users text-4xl text-[#008080] mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-4">Find Your Community</h3>
+                    <p class="text-gray-600">Connect with like-minded people and discover communities that share your interests</p>
                 </div>
-            </div>
-        </div>
-
-        <div class="desc-panel reverse">
-            <div class="desc-content">
-                <div class="desc-text">
-                    <h2>Safe & Inclusive Space</h2>
-                    <p>Built with advanced moderation tools and privacy controls, ensuring everyone feels welcome and secure in expressing themselves authentically.</p>
+                <div class="text-center">
+                    <i class="fas fa-handshake text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-4">Collaborate & Share</h3>
+                    <p class="text-gray-600">Share resources, thoughts, and work together to achieve common goals</p>
                 </div>
-                <img src="https://via.placeholder.com/400x300" alt="Safe Community" class="desc-img">
-            </div>
-        </div>
-
-        <div class="desc-panel">
-            <div class="desc-content">
-                <img src="https://via.placeholder.com/400x300" alt="Collaboration Tools" class="desc-img">
-                <div class="desc-text">
-                    <h2>Powerful Collaboration Tools</h2>
-                    <p>From group chats to resource sharing, project tracking to event planning - everything your community needs to thrive together.</p>
+                <div class="text-center">
+                    <i class="fas fa-chart-line text-4xl text-indigo-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-4">Grow Together</h3>
+                    <p class="text-gray-600">Help your community thrive through active participation and engagement</p>
                 </div>
-            </div>
-        </div>
-
-        <div class="desc-panel reverse">
-            <div class="desc-content">
-                <div class="desc-text">
-                    <h2>Impact Tracking</h2>
-                    <p>Measure and celebrate your community's achievements with built-in analytics and milestone tracking features.</p>
-                </div>
-                <img src="https://via.placeholder.com/400x300" alt="Impact Metrics" class="desc-img">
             </div>
         </div>
     </section>
 
-    <section class="download" id="download">
-        <h2>Join the Community Revolution</h2>
-        <p style="margin: 1rem 0;">Be part of something bigger. Connect, collaborate, and create change together.</p>
-        <a href="C:\Users\jeremee\Documents\synthronize-implementation site/Synthronize.apk" 
-           download="Synthronize.apk" 
-           class="btn">
-            <i class="fas fa-download"></i>
-            Download Synthonize Beta
-        </a>
-        <p class="coming-soon">Android v7.0+ required</p>
-        <div class="download-info">
-            <span><i class="fas fa-file"></i> Version 0.9.0 Beta</span>
-            <span><i class="fas fa-weight"></i> 15MB</span>
+    <!-- About -->
+    <section id="about" class="py-20 bg-gray-100">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-8">About Synthronize</h2>
+            <p class="text-gray-600 leading-relaxed">
+                Synthronize is more than just a social media app - it's a platform designed to bring communities together.
+                We believe in the power of connection and collaboration to create positive change. Our mission is to provide
+                the tools and space for people to find their tribe, share their knowledge, and grow together.
+            </p>
         </div>
     </section>
+
+    <!-- Team Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-16">Meet Our Team</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+                <!-- Team Member 1 -->
+                <div class="bg-gray-50 rounded-xl p-8 text-center transform transition duration-500 hover:-translate-y-2 hover:shadow-xl">
+                    <div class="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-r from-[#008080] to-[#006666] flex items-center justify-center">
+                        <i class="fas fa-user-tie text-4xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Jeremee Cayde</h3>
+                    <p class="text-[#008080] font-medium mb-4">IT Specialist</p>
+                    <div class="w-16 h-1 bg-[#008080] mx-auto mb-4"></div>
+                    <p class="text-gray-600">Leading our technical infrastructure and ensuring smooth operations.</p>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="bg-gray-50 rounded-xl p-8 text-center transform transition duration-500 hover:-translate-y-2 hover:shadow-xl">
+                    <div class="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-4xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Benedict Fernandez</h3>
+                    <p class="text-indigo-600 font-medium mb-4">Android Developer</p>
+                    <div class="w-16 h-1 bg-indigo-600 mx-auto mb-4"></div>
+                    <p class="text-gray-600">Creating seamless mobile experiences for our users.</p>
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="bg-gray-50 rounded-xl p-8 text-center transform transition duration-500 hover:-translate-y-2 hover:shadow-xl">
+                    <div class="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-r from-indigo-600 to-purple-600 flex items-center justify-center">
+                        <i class="fas fa-check-circle text-4xl text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Sean Ysagun</h3>
+                    <p class="text-indigo-600 font-medium mb-4">Quality Assurance</p>
+                    <div class="w-16 h-1 bg-indigo-600 mx-auto mb-4"></div>
+                    <p class="text-gray-600">Ensuring the highest standards of app performance and reliability.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="py-20">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Get in Touch</h2>
+            <form onsubmit="sendEmail(event)" class="space-y-6">
+                <div>
+                    <label class="block text-gray-700 mb-2">Name</label>
+                    <input type="text" name="name" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" name="email" required class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-indigo-500">
+                </div>
+                <div>
+                    <label class="block text-gray-700 mb-2">Message</label>
+                    <textarea name="message" required rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-indigo-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-[#008080] hover:bg-[#006666] text-white py-3 rounded-lg transition">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <img src="synthronizeLogo.png" alt="Synthronize Logo" class="h-12 mx-auto mb-6">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a href="#" class="hover:text-indigo-400"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-indigo-400"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="hover:text-indigo-400"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="text-gray-400">&copy; 2024 Synthronize. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
