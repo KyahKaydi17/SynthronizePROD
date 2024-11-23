@@ -10,10 +10,137 @@
     
     <style>
         :root {
-            --brand-primary: #008080; /* Teal */
-            --brand-secondary: #006666; /* Darker Teal */
-            --brand-accent: #00a3a3; /* Lighter Teal */
-            --brand-light: #e6ffff; /* Very Light Teal */
+            --brand-primary: #00a4a4;
+            --brand-secondary: #005555;
+            --accent-glow: #00ffff;
+            --dark-bg: #0a1921;
+            --card-bg: rgba(2, 22, 34, 0.95);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #ffffff;
+        }
+
+        /* Add these styles to your existing style section */
+        @media (max-width: 768px) {
+            .space-x-8 {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .space-x-8.show {
+                display: flex;
+            }
+            
+            .space-x-8 a {
+                margin: 0.5rem 0;
+            }
+        }
+
+        /* Add smooth transitions */
+        .transition-all {
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Add hover effects */
+        .hover\:scale-105:hover {
+            transform: scale(1.05);
+        }
+
+        /* Improve button accessibility */
+        button:focus, a:focus {
+            outline: 2px solid #00a3a3;
+            outline-offset: 2px;
+        }
+
+        /* Add loading animation */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Animated background */
+        .hero-bg {
+            background: linear-gradient(45deg, var(--dark-bg), var(--brand-secondary));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjEpIi8+PC9zdmc+');
+            animation: backgroundMove 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        /* Glowing download button */
+        .download-btn {
+            background: linear-gradient(45deg, var(--brand-primary), var(--brand-secondary));
+            border: 2px solid var(--accent-glow);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+            transform: rotate(45deg);
+            animation: glowingEffect 3s infinite;
+        }
+
+        /* Feature cards */
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--brand-primary);
+            backdrop-filter: blur(10px);
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 10px 30px rgba(0, 164, 164, 0.3);
+        }
+
+        /* Animations */
+        @keyframes glowingEffect {
+            0% { transform: rotate(45deg) translateY(-100%); }
+            100% { transform: rotate(45deg) translateY(100%); }
+        }
+
+        @keyframes backgroundMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+
+        @keyframes floatingAnimation {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
         }
     </style>
 
@@ -56,43 +183,56 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="pt-20 pb-32 bg-gradient-to-r from-[#008080] to-[#006666]">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Updated Hero Section with Enhanced Download Area -->
+    <section class="hero-bg min-h-screen flex items-center justify-center pt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
             <div class="flex flex-col md:flex-row items-center justify-between">
-                <div class="md:w-1/2 text-white">
-                    <h1 class="text-5xl font-bold mb-6">Connect & Grow Your Communities</h1>
-                    <p class="text-xl mb-8">Unite, collaborate, and build stronger communities together with Synthronize</p>
-                    <a href="Synthronize.apk" download class="bg-white text-[#008080] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition">
-                        Download APK
-                    </a>
+                <div class="md:w-1/2 text-white z-10">
+                    <h1 class="text-6xl font-bold mb-6 leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-teal-300">
+                        Connect Your Communities
+                    </h1>
+                    <p class="text-xl mb-8 text-teal-100">Unite, collaborate, and build stronger communities together</p>
+                    
+                    <div class="space-y-4">
+                        <a href="synthronize.apk" 
+                           download 
+                           class="download-btn group px-8 py-4 rounded-lg font-bold text-xl inline-flex items-center space-x-3 transform hover:scale-105 transition-all">
+                            <i class="fab fa-android text-2xl"></i>
+                            <span>DOWNLOAD NOW</span>
+                            <span class="text-sm opacity-75">(v1.0.0)</span>
+                        </a>
+                    </div>
                 </div>
-                <div class="md:w-1/2 mt-10 md:mt-0">
-                    <img src="synthronizeLogo.png" alt="App Preview" class="w-full max-w-md mx-auto">
+                
+                <div class="md:w-1/2 mt-10 md:mt-0 relative">
+                    <img src="synthronizeLogo.png" 
+                         alt="App Preview" 
+                         class="w-full max-w-md mx-auto animate-[floatingAnimation_6s_ease-in-out_infinite]">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[#0a1921] via-transparent to-transparent"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Features -->
-    <section id="features" class="py-20">
+    <section id="features" class="py-32 relative">
         <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-16">Why Choose Synthronize?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-                <div class="text-center">
-                    <i class="fas fa-users text-4xl text-[#008080] mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-4">Find Your Community</h3>
-                    <p class="text-gray-600">Connect with like-minded people and discover communities that share your interests</p>
+            <h2 class="text-4xl font-bold text-center mb-16 text-white">Why Choose <span class="text-[var(--brand-primary)]">Synthronize</span>?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card p-8 rounded-xl">
+                    <i class="fas fa-users text-5xl text-[var(--brand-primary)] mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4">Find Your Community</h3>
+                    <p class="text-gray-300">Connect with like-minded people and discover communities that share your interests</p>
                 </div>
-                <div class="text-center">
-                    <i class="fas fa-handshake text-4xl text-indigo-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-4">Collaborate & Share</h3>
-                    <p class="text-gray-600">Share resources, thoughts, and work together to achieve common goals</p>
+                <div class="feature-card p-8 rounded-xl">
+                    <i class="fas fa-handshake text-5xl text-[var(--brand-primary)] mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4">Collaborate & Share</h3>
+                    <p class="text-gray-300">Share resources, thoughts, and work together to achieve common goals</p>
                 </div>
-                <div class="text-center">
-                    <i class="fas fa-chart-line text-4xl text-indigo-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-4">Grow Together</h3>
-                    <p class="text-gray-600">Help your community thrive through active participation and engagement</p>
+                <div class="feature-card p-8 rounded-xl">
+                    <i class="fas fa-chart-line text-5xl text-[var(--brand-primary)] mb-6"></i>
+                    <h3 class="text-2xl font-bold mb-4">Grow Together</h3>
+                    <p class="text-gray-300">Help your community thrive through active participation and engagement</p>
                 </div>
             </div>
         </div>
@@ -187,5 +327,46 @@
             <p class="text-gray-400">&copy; 2024 Synthronize. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Add this script before closing body tag -->
+    <script>
+    document.querySelector('.download-btn').addEventListener('click', function(e) {
+        const progressBar = document.querySelector('#download-progress');
+        const progressFill = progressBar.querySelector('div > div');
+        
+        progressBar.classList.remove('hidden');
+        
+        // Simulate download progress
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 30;
+            if (progress > 100) {
+                progress = 100;
+                clearInterval(interval);
+                setTimeout(() => {
+                    progressBar.classList.add('hidden');
+                    progressFill.style.width = '0%';
+                }, 1000);
+            }
+            progressFill.style.width = `${progress}%`;
+        }, 500);
+    });
+
+    // Add smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Add responsive menu for mobile
+    const mobileMenu = () => {
+        const menu = document.querySelector('.space-x-8');
+        menu.classList.toggle('hidden');
+    };
+    </script>
 </body>
 </html>
